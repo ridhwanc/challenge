@@ -1,3 +1,4 @@
+# Feature 1
 name: electron-secure-defaults
 
 on:
@@ -27,6 +28,7 @@ jobs:
       - name: Install electron-builder
         run: npm install electron-builder
 
+     # Feature 4:
      # Step 6: Package Electron App
       - name: Build Electron App
         run: export GH_TOKEN=${{ secrets.ACCESS_TOKEN }} && npx electron-builder -mwl --x64
@@ -40,7 +42,7 @@ jobs:
         with:
           github_token: ${{ secrets.ACCESS_TOKEN }}
 
-        # Step 4: Send out the email
+      # Step 4: Send out the email
       # - name: Send email
       #   uses: dawidd6/action-send-mail@v3
       #   with:
@@ -55,6 +57,7 @@ jobs:
       #     body: |
       #       Build succeeded for electron-secure-defaults on branch $BUILD_BRANCH at $BUILD_TIME (SHA: $BUILD_SHA)
 
+  # Feature 3
   vulnerabilities:
     runs-on: macos-latest
     steps:
