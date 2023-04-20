@@ -18,6 +18,7 @@ jobs:
 
       # Step 2: Install dependencies
       - name: Install dependencies
+        uses: actions/setup-node@v3
         run: npm install
 
       # Step 3: Build the app
