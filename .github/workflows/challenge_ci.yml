@@ -23,6 +23,10 @@ jobs:
       - name: Build the app
         run: npm run build
 
+      # Step 4: Install electron-builder
+      - name: Install electron-builder
+        run: npm install electron-builder
+
      # Step 6: Package Electron App
       - name: Build Electron App
         run: export GH_TOKEN=${{ secrets.ACCESS_TOKEN }} && npx electron-builder -mwl --x64
