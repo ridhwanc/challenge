@@ -15,10 +15,10 @@ jobs:
       # Step 1: Checkout code from the repository
       - name: Checkout code
         uses: actions/checkout@v2
-
-      # Step 2: Setup dependencies
-      - name: Setup dependencies
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci
 
       # Step _: Install
       - name: Install dependencies
