@@ -9,7 +9,6 @@ on:
 
 jobs:
   build:
-
     runs-on: macos-latest
     steps:
       # Step 1: Checkout code from the repository
@@ -43,6 +42,7 @@ jobs:
           github_token: ${{ secrets.ACCESS_TOKEN }}
   # Feature 3
   check:
+    needs: build
     runs-on: macos-latest
     steps:
       - name: Checkout code
