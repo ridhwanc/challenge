@@ -23,16 +23,18 @@ jobs:
       - name: Build the app
         run: npm run build
 
-      - name: Build and release Electron app
-        uses: samuelmeuli/action-electron-builder@v1.6.0
-        with:
-          # GitHub token, automatically provided to the action
-          # (No need to define this secret in the repo settings)
-          github_token: ${{ secrets.github_token }}
+     # Step 6: Package Electron App
+      - name: Build Electron App
+        run: export GH_TOKEN=${{ secrets.ACCESS_TOKEN }} && npx electron-builder -mwl --x64
 
-          # If the commit is tagged with a version (e.g. "v1.0.0"),
-          # release the app after building
-          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
+      # Step 7 Zip Folder and Ready Release
+      - name: Zip folder
+        run: zip -r electron-secure-defaults.zip . -x ".git/*" ".github/*" "node_modules/*"
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.ACCESS_TOKEN }}
 
         # Step 4: Send out the email
       # - name: Send email
