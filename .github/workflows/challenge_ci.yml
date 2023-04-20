@@ -22,3 +22,14 @@ jobs:
       # Step 3: Build the app
       - name: Build the app
         run: npm run build
+
+  vulnerabilities:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
+      # Step 4: Audit the app for vulnerabilities
+      - name: Check for vulnerabilities
+        run: npm run electronegativity
