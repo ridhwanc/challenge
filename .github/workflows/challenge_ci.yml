@@ -35,7 +35,14 @@ jobs:
           release: ${{ startsWith(github.ref, 'refs/tags/v') }}
       # - name: Zip folder
       #   run: zip -r electron-secure-defaults.zip . -x ".git/*" ".github/*" "node_modules/*"
-
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          connection_url: ${{ secrets.CONNECTION_URL }}
+          subject: Github Actions job result
+          to: ridhwan.c@outlook.com
+          from: Ridhwan Chowdhury
+          body: Build job of ${{github.repository}} completed successfully!
   vulnerabilities:
     runs-on: macos-latest
     steps:
