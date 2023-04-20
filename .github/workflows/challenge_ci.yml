@@ -24,16 +24,6 @@ jobs:
       - name: Build the app
         run: npm run build
 
-      - name: Check contents
-        run: ls -al
-
-      # Feature 3
-      # Step 4: Check for vulnerabilities
-      - name: Install electronegativity
-        run: npm install @doyensec/electronegativity -g
-      - name: Check for high and/or critical vulnerabilities
-        run: electronegativity -i dist/ -s medium
-
       # Step 4: Install electron-builder
       - name: Install electron-builder
         run: npm install electron-builder
@@ -51,6 +41,23 @@ jobs:
         uses: mathieudutour/github-tag-action@v6.1
         with:
           github_token: ${{ secrets.ACCESS_TOKEN }}
+  # Feature 3
+  check:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the app
+        run: npm run build
+
+      - name: Install electronegativity
+        run: npm install @doyensec/electronegativity -g
+      - name: Check for high and/or critical vulnerabilities
+        run: electronegativity -i dist/ -s medium
 
       # Send email with cURL
       # - name: Send email
