@@ -8,7 +8,7 @@
     "watch": "tsc -w",
     "lint": "eslint -c .eslintrc --ext .ts ./src",
     "start": "npm run build && electron ./dist/main.js",
-    "package": "yarn electron-builder --publish never",
+    "package": "yarn electron-builder --publish always",
     "electronegativity": "electronegativity -i ./src"
   },
   "repository": "https://github.com/1password/electron-secure-defaults",

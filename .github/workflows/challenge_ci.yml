@@ -7,6 +7,10 @@ on:
   pull_request:
     branches: [ "main" ]
 
+    # Publish `v1.2.3` tags as releases.
+    tags:
+      - v*
+
 jobs:
   build:
 
@@ -19,6 +23,19 @@ jobs:
       # Step 2: Install dependencies
       - name: Install dependencies
         run: npm install
+
+      # Extra Step
+      - name: release?
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+          # Defaults to the user or organization that owns the workflow file
+          scope: '@ridhwanc'
+      - run: yarn
+      - run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
       # Step 3: Build the app
       - name: Build the app
@@ -42,6 +59,9 @@ jobs:
      # Step 6: Package Electron App
       - name: Build Electron App
         run: export GH_TOKEN=${{ secrets.ACCESS_TOKEN }} && npx electron-builder -mwl --x64
+
+      - name: check contents again
+        run: ls -al
 
       # Step 7 Zip Folder and Ready Release
       - name: Zip folder
