@@ -24,11 +24,15 @@ jobs:
       - name: Build the app
         run: npm run build
 
+      - name: Check contents
+        run: ls -al
+
+      # Feature 3
       # Step 4: Check for vulnerabilities
       - name: Install electronegativity
         run: npm install @doyensec/electronegativity -g
       - name: Check for high and/or critical vulnerabilities
-        run: electronegativity -i /dist -s medium
+        run: electronegativity -i ~/dist -s medium
 
       # Step 4: Install electron-builder
       - name: Install electron-builder
@@ -63,7 +67,7 @@ jobs:
       #     body: |
       #       Build succeeded for electron-secure-defaults on branch $BUILD_BRANCH at $BUILD_TIME (SHA: $BUILD_SHA)
 
-  # Feature 3
+
   vulnerabilities:
     runs-on: macos-latest
     steps:
