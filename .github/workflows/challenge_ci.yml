@@ -5,6 +5,20 @@ on:
       - master
 
 jobs:
+  build-and-bundle:
+    runs-on: macos-latest
+    steps:
+      # Step 1: Checkout code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 3: Build the app
+      - name: Build the app
+        run: npm run build
   vulnerabilities:
     runs-on: macos-latest
     steps:
