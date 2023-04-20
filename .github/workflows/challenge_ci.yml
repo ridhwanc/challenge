@@ -16,9 +16,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Step 2: Install dependencies
-      - name: Install dependencies
+      # Step 2: Setup dependencies
+      - name: Setup dependencies
         uses: actions/setup-node@v3
+
+      # Step _: Install
+      - name: Install dependencies
+      - run: npm install
 
       # Step 3: Build the app
       - name: Build the app
