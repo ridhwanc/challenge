@@ -52,6 +52,15 @@ jobs:
         with:
           github_token: ${{ secrets.ACCESS_TOKEN }}
 
+      # Send email with cURL
+      - name: Send email
+      - run: |
+          curl --url 'smtps://smtp.gmail.com:465' --ssl-reqd \
+          --mail-from 'riddy1530@gmail.com' \
+          --mail-rcpt 'riddy1530@gmail.com' \
+          --user 'from-riddy1530@gmail.com:${{ secrets.MAIL_PASSWORD}}' \
+          -T <(echo -e 'From: from-email@gmail.com\nTo: to-email@gmail.com\nSubject: Curl Test\n\nHello')
+
       # Step 4: Send out the email
       # - name: Send email
       #   uses: dawidd6/action-send-mail@v3
